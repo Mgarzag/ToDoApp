@@ -36,6 +36,14 @@ function App() {
 
     };
 
+    // Create the function to handle deleting a task
+    const deleteTodo = (idToDelete: string): void => {
+      // Filter out the item with the matching ID
+      // .filter() creates a brand new array, maintaining state immutability
+      setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== idToDelete));
+    };
+
+
     return (
       <div className="padded-container">
         {/* Use a form component to support both 'Enter' key and button clicks */}
@@ -52,7 +60,13 @@ function App() {
         {/* 5. Render the list */}
           <ul>
             {todos.map((todo) => (
-              <li key={todo.id}>{todo.text}</li>
+              <li key={todo.id}>
+                {todo.text}
+                {/* Pass the item ID into the delete function on click */}
+                <button onClick={() => deleteTodo(todo.id)} style={{ marginLeft: '10px' }}>
+                Delete
+                </button>
+                </li>
             ))}
           </ul>
       </div>
