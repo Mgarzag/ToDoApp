@@ -43,6 +43,16 @@ function App() {
       setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== idToDelete));
     };
 
+    // Create function to handle checking off tasks
+    const toggleTodo = (idToToggle: number): void => {
+      // Map through the array and invert the completed boolean for the matching ID
+      setTodos((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === idToToggle ? { ...todo, completed: !todo.completed } : todo
+        )
+      );
+    };
+
 
     return (
       <div className="padded-container">
@@ -61,9 +71,24 @@ function App() {
           <ul>
             {todos.map((todo) => (
               <li key={todo.id}>
-                {todo.text}
+                {/* Checkbox triggers the toggle function */}
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => toggleTodo(todo.id)}
+                  className="todo-checkbox"
+                />
+
+                {/* Conditional styling applies a line-through if completed */}
+                <span className={todo.completed ? 'todo-text completed' : 'todo-text'}>
+                  {todo.text}
+                </span>
+
                 {/* Pass the item ID into the delete function on click */}
-                <button onClick={() => deleteTodo(todo.id)} style={{ marginLeft: '10px' }}>
+                <button 
+                  onClick={() => deleteTodo(todo.id)}
+                  className="delete-button"
+                >
                 Delete
                 </button>
                 </li>

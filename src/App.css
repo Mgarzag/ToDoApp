@@ -1,4 +1,19 @@
 .padded-container {
     padding: 20px;
   }
-  
+
+.delete-button {
+  margin-left: 10px;
+}
+
+.todo-checkbox {
+  margin-right: 10px;
+}
+
+.todo-text {
+  text-decoration: none;
+}
+
+.todo-text.completed {
+  text-decoration: line-through;
+}
